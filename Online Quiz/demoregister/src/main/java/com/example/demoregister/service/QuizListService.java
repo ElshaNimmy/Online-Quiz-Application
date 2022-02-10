@@ -15,6 +15,10 @@ public class QuizListService {
     public QuizListRepository repo;
 
 
+    public QuizList saveQuizList(QuizList quizList){
+        return repo.save(quizList);
+    }
+
     public List<QuizList> getQuizByQuizId(Subject subject) {
         return repo.findQuizBySubjectId(subject);
 

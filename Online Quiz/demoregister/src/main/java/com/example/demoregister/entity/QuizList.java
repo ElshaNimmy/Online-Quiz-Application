@@ -3,6 +3,7 @@ package com.example.demoregister.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -11,8 +12,7 @@ public class QuizList {
     @Id
     private Long quizId;
 
-    @Column(nullable = false)
-    private String quizName;
+
 
     @Column(nullable = false)
     private String level;
@@ -23,13 +23,15 @@ public class QuizList {
     @JsonIgnore
     @ManyToOne
     private Subject subject;
+    @OneToMany
+    private List<Question> questions;;
 
     public QuizList(){
 
     }
-    public QuizList(Long quizId, String quizName, String level,Integer score){
+    public QuizList(Long quizId, String level,Integer score){
         this.quizId=quizId;
-        this.quizName=quizName;
+
         this.level=level;
         this.score=score;
     }
@@ -41,13 +43,7 @@ public class QuizList {
         this.quizId = quizId;
     }
 
-    public String getQuizName() {
-        return quizName;
-    }
 
-    public void setQuizName(String quizName) {
-        this.quizName = quizName;
-    }
 
     public String getLevel() {
         return level;

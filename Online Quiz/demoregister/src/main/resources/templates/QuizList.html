@@ -47,7 +47,7 @@ li a:hover {
   background-color: #111;
 }
 body{
- background-image: url("https://c0.wallpaperflare.com/preview/772/980/935/book-reading-glasses-learning.jpg");
+ background-image: url("https://media.istockphoto.com/videos/kids-drawing-pop-art-seamless-background-with-theme-of-quiz-video-id1128147392?s=640x640");
  background-color: #cccccc;
 }
 
@@ -67,19 +67,17 @@ body{
     <tr>
 
         <th>Quiz Id</th>
-        <th>Quiz Name</th>
         <th>Level</th>
         <th>Score</th>
         <th>Quizz</th>
     </tr>
     <tr th:each="quizList:${quizList}">
         <td th:text="${quizList.quizId}"></td>
-        <td th:text="${quizList.quizName}"></td>
         <td th:text="${quizList.level}"></td>
         <td th:text="${quizList.score}"></td>
 <!--        <td><a th:href="/quiz" class="btn btn-primary text-center">Start Quiz</a></button></td>-->
 
-        <td><a th:href="@{/quiz/{id}(id=${quizList.quizId})}" class="btn btn-primary text-center">Start Quiz</a></button></td>
+        <td><a th:href="@{/Quiz/{id}(id=${quizList.quizId})}" class="btn btn-primary text-center">Start Quiz</a></button></td>
     </tr>
 </table>
 </body>

@@ -11,8 +11,7 @@ import java.util.List;
 public class SubjectService {
     @Autowired
     public SubjectRepository repository;
-
-
+    public Subject saveSubject(Subject subject){return repository.save(subject);}
     public Subject getSubjectById(Long subjectId) {
         return repository.getById(subjectId);
     }

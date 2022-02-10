@@ -83,17 +83,7 @@ public class UserController {
         public String homeAdmin() {
             return "HomeAdmin";
         }
-    @PostMapping("/Login")
-    public String userRegistration(HttpServletRequest req, Model model) {
-        if (!(req.getParameter("password").equals(req.getParameter("confirmPassword")))) {
-            model.addAttribute("message", "password doesn't match");
-            return "Register";
-        }
-        User user = new User(req.getParameter("username"), req.getParameter("email"), req.getParameter("password"));
-        service.saveUser(user);
-        return "Login";
 
-    }
 
 
 }

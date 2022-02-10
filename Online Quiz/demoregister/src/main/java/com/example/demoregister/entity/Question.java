@@ -1,5 +1,6 @@
 package com.example.demoregister.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -20,22 +21,23 @@ import org.springframework.stereotype.Component;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int quesId;
         private long quizId;
-        private long id;
         private String title;
         private String optionA;
         private String optionB;
         private String optionC;
         private int ans;
         private int chose;
+        @JsonIgnore
+        @ManyToOne
+        private QuizList quizList;
 
         public Question() {
             super();
         }
 
-        public Question(int quesId,long id,long quizId, String title, String optionA, String optionB, String optionC, int ans, int chose) {
+        public Question(int quesId,long quizId, String title, String optionA, String optionB, String optionC, int ans, int chose) {
             super();
             this.quizId=quizId;
-            this.id=id;
             this.quesId = quesId;
             this.title = title;
             this.optionA = optionA;
@@ -51,15 +53,6 @@ import org.springframework.stereotype.Component;
         public void setQuizId(long quizId) {
             this.quizId = quizId;
         }
-
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
 
         public int getQuesId() {
             return quesId;
@@ -119,7 +112,7 @@ import org.springframework.stereotype.Component;
 
         @Override
         public String toString() {
-            return "Question [quesId=" + quesId + ", title=" + title + ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC + ", ans=" + ans + ", chose=" + chose + "]";
+            return "Question [quesId=" + quesId + ",quizId=" + quizId +", title=" + title + ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC + ", ans=" + ans + ", chose=" + chose + "]";
         }
 
     }

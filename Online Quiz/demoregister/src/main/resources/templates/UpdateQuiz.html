@@ -70,17 +70,20 @@ a {
 <div class="container mt-5 d-flex justify-content-center">
 
     <div class="col-6">
-        <form action="/Subject" method = "post">
+        <form action="/QuizList" method = "post">
             <div class="container">
-                <h1><center>Add subject</center></h1>
+                <h1><center>Add Quiz Level</center></h1>
 
                 <hr>
                 <label for="number"><b>Subject Id</b></label>
                 <input type="number" placeholder="Enter Id" name="subjectId" id="number" required><br/><br/>
-                <label for="subject"><b>Subject Name</b></label>
-                <input type="text" placeholder="Enter Subject Name" name="subjectName" id="subject" required>
+                <label for="num"><b>Quiz Id</b></label>
+                <input type="number" placeholder="Enter QuizId" name="quizId" id="num" required><br/><br/>
+                <label for="level"><b>Level</b></label>
+                <input type="text" placeholder="Enter Level" name="level" id="level" required><br/><br/>
+                <label for="score"><b>Score</b></label>
+                <input type="number" placeholder="Enter score" name="score" id="score" required><br/><br/>
                 <button type="submit" class="registerbtn">Add</button>
-
 
                 <div class="container signin">
                 </div>
