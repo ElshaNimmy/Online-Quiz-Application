@@ -13,7 +13,6 @@ public interface QuizListRepository extends JpaRepository<QuizList,Long> {
     List<QuizList> findQuizBySubjectId(Subject subject);
 
     @Query("Select quizList from QuizList quizList where quizList.quizId=:quizId")
-//    QuizList findShowById(Long quizId);
     QuizList findQuizById(Long quizId);
 }
 

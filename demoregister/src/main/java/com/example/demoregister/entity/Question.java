@@ -13,6 +13,8 @@ import javax.persistence.Table;
     @Table(name = "questions")
     public class Question {
         @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
         private Long quesId;
         private Long quizId;
         private Long subjectId;

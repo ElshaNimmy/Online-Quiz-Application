@@ -3,18 +3,17 @@ package com.example.demoregister.controller;
 
 
 import com.example.demoregister.entity.*;
-import com.example.demoregister.repository.QuestionRepository;
 import com.example.demoregister.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import java.security.Principal;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Controller
@@ -49,7 +48,7 @@ public class QuizController {
     }
     @RequestMapping("/QuizList/{subjectId}")
     public String quizList(@PathVariable Long subjectId, Model model){
-    subject = subjectService.getSubjectById(subjectId);
+     subject = subjectService.getSubjectById(subjectId);
         idSubject=subject.getSubjectId();
         model.addAttribute("quizList",quizListService.getQuizByQuizId(subject));
         return "QuizList";
@@ -57,8 +56,8 @@ public class QuizController {
     @RequestMapping("/Quiz/{id}")
     public String quiz(@PathVariable Long id, Model model){
         quizId = id;
-        List question = questionService.listAllQuiz(quizId);
-        model.addAttribute("qForm", questionService.listAllQuiz(quizId));
+        List <Question> question = questionService.listAllQuizBySubject(quizId,subject.getSubjectId());
+        model.addAttribute("qForm", question);
         return "Quiz";
     }
     @RequestMapping("/UpdateSubject")
@@ -70,7 +69,7 @@ public class QuizController {
     public String subjectUpdation(HttpServletRequest req, Model model) {
         String subName=req.getParameter("subjectName");
         Long subId=(Long.parseLong(req.getParameter("subjectId")));
-        subject = new Subject(subId,subName);
+        Subject subject = new Subject(subId,subName);
         subjectService.saveSubject(subject);
         model.addAttribute("subjects", subjectService.getAllSubject());
         return "subjectView";
@@ -83,7 +82,7 @@ public class QuizController {
     @PostMapping("/QuizList")
     public String quizUpdate(HttpServletRequest req ,Model model) {
        Long subjectId= Long.valueOf((req.getParameter("subjectId")));
-       subject =subjectService.getSubjectById(subjectId);
+       Subject subject =subjectService.getSubjectById(subjectId);
        Long quizId=(Long.parseLong(req.getParameter("quizId")));
        String level=req.getParameter("level");
        Integer score=Integer.parseInt(req.getParameter("score"));
@@ -121,6 +120,8 @@ public class QuizController {
     public String checkAns(HttpServletRequest request, Model model, Principal principal) {
 //        HttpSession session = request.getSession();
 //        String username = (String) session.getAttribute("username");
+        correct=0;
+        wrong=0;
         String username=principal.getName();
         for(int i=0;i< Integer.parseInt(request.getParameter("arrayLength"));i++) {
             if (request.getParameter("qForm[" + i + "]").equals(request.getParameter("qForm[" + i + "].ans"))) {
@@ -138,14 +139,14 @@ public class QuizController {
         model.addAttribute("quizDetails",quizList);
         model.addAttribute("subjectDetails",subject);
         model.addAttribute("username",username);
-        score=correct*2;
-        model.addAttribute("score",score);
+//        score=correct*2;
+//        model.addAttribute("score",score);
         return "result";
 
     }
 
     @PostMapping("/scoreCard")
-    public String scoreCard(HttpServletRequest request,Principal principal){
+    public String scoreCard(HttpServletRequest request,Model model,Principal principal){
         String username=principal.getName();
         Score score=new Score();
         score.setScore(Integer.parseInt(request.getParameter("correctans"))*2);
@@ -153,12 +154,15 @@ public class QuizController {
         score.setSubjectName(request.getParameter("subjectname"));
         score.setLevel(request.getParameter("level"));
         scoreService.saveScore(score);
-        listScoreByUsername(request.getParameter("username"));
+        List<Score> scores = scoreService.listScoreByUsername(username);
+        model.addAttribute("scores",scores);
+
+        //listScoreByUsername(request.getParameter("username"));
         return "scoreCard";
     }
     private List listScoreByUsername(String username){
         List scoreCard1=scoreService.listScoreByUsername(username);
-        System.out.println(scoreCard1);
+        //System.out.println(scoreCard1);
         return null;
     }
 

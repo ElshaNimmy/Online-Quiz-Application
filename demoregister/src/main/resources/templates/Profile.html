@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Add Questions</title>
 
     <style>
         * {box-sizing: border-box}
@@ -70,21 +70,31 @@ a {
 <div class="container mt-5 d-flex justify-content-center">
 
     <div class="col-6">
-        <form action="/adminLogin" method = "post">
+        <form action="/Quiz" method = "post">
             <div class="container">
-                <h1><center>Admin Registeration</center></h1>
+                <h1><center>Add Questions</center></h1>
 
                 <hr>
-                <label for="text"><b>Name</b></label>
-                <input type="text" placeholder="Enter UserName" name="username" id="text" required>
+                <label for="numb"><b>Subject Id</b></label>
+                <input type="number" placeholder="Enter SubjectId" name="subjectId" id="numb" required><br/><br/>
+                <label for="num"><b>Quiz Id</b></label>
+                <input type="number" placeholder="Enter QuizId" name="quizId" id="num" required><br/><br/>
+                <label for="number"><b>Question Id</b></label>
+                <input type="number" placeholder="Enter QuestionId" name="quesId" id="number" required><br/><br/>
+                <label for="question"><b>Question</b></label>
+                <input type="text" placeholder="Enter Question" name="title" id="question" required>
+                <label for="ans"><b>Answer</b></label>
+                <input type="text" placeholder="Enter Answer" name="ans" id="ans" required>
+                <label for="optionA"><b>Option A</b></label>
+                <input type="text" placeholder="Enter Option A" name="optionA" id="optionA" required>
+                <label for="optionB"><b>Option B</b></label>
+                <input type="text" placeholder="Enter Option B" name="optionB" id="optionB" required>
+                <label for="optionC"><b>Option C</b></label>
+                <input type="text" placeholder="Enter Option C" name="optionC" id="optionC" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="psw" required>
-                <label for="psw"><b>confirm-Password</b></label>
-                <input type="password" placeholder="Enter Confirm Password" name="confirmPassword" id="confirmPassword" required>
-                <button type="submit" class="registerbtn">Register</button>
+                <button type="submit" class="registerbtn">Add</button>
+
             </div>
-
 
         </form>
 </body>

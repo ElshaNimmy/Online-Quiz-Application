@@ -15,8 +15,10 @@ public class QuestionService {
    public Question saveQuestion(Question question){
        return repository.save(question);
    }
-
-    public List<Question> listAllQuiz(Long id){
-        return repository.listAllQuiz(id);
+  public List<Question> listAllQuiz(Long id){
+    return repository.listAllQuiz(id);
+}
+    public List<Question> listAllQuizBySubject(Long id,Long subjectId){
+        return repository.listAllQuizBySubject(id,subjectId);
     }
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
-    @Query("SELECT question FROM Question question WHERE question.quizId = :id")
+    @Query("SELECT question FROM Question question WHERE question.quizId = :id AND question.subjectId=:subjectId")
+    List<Question> listAllQuizBySubject(@Param("id") Long Id,Long subjectId);
+    @Query("SELECT question FROM Question question WHERE question.quizId = :id ")
     List<Question> listAllQuiz(@Param("id") Long Id);
 }

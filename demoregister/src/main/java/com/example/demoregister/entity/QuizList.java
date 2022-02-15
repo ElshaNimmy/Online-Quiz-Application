@@ -10,6 +10,8 @@ import java.util.List;
 public class QuizList {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Long quizId;
 
     @Column(nullable = false)

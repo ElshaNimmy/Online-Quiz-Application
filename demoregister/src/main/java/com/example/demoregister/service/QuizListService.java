@@ -28,6 +28,5 @@ public class QuizListService {
         return repo.findQuizById(quizId);
     }
 
-    public static class Admin {
-    }
+
 }

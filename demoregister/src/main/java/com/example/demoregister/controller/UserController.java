@@ -50,6 +50,10 @@ public class UserController {
 
     }
 
+    @RequestMapping("/Home")
+    public String home() {
+        return "Home";
+    }
 
     @PostMapping("/Home")
     public String validateUser(HttpServletRequest request, Model model) {
@@ -81,6 +85,10 @@ public class UserController {
             }
         }
     }
+    @RequestMapping("/HomeAdmin")
+    public String homeAdmin() {
+        return "HomeAdmin";
+    }
 
     @RequestMapping("/adminRegister")
     public String adminRegister() {
@@ -102,58 +110,16 @@ public class UserController {
 
     }
 
-//    @RequestMapping("/profile")
-//    public String userProfile(Model model) {
-//        User user = service.identifyUserByUsername(username);
-//
-//        model.addAttribute("username", user.getUsername());
-//        model.addAttribute("email", user.getEmail());
-//        model.addAttribute("phone", user.getPhone());
-//
-//        return "profile";
-//    }
-//
-//    @PostMapping("/profile")
-//    public String ProfileUpdated(HttpServletRequest request, Model model) {
-//        User user = service.identifyUserByUsername(username);
-//        user.setEmail(request.getParameter("email"));
-//        user.setPhone(request.getParameter("phone"));
-//        service.saveUser(user);
-//        model.addAttribute("username", user.getUsername());
-//        model.addAttribute("email", user.getEmail());
-//        model.addAttribute("phone", user.getPhone());
-//        return "profile";
-//    }
-//
-//    @RequestMapping("/updateProfile")
-//    public String updateProfile(Model model) {
-//        User user = service.identifyUserByUsername(username);
-//
-//        model.addAttribute("name", user.getUsername());
-//        model.addAttribute("email", user.getEmail());
-//        model.addAttribute("phone", user.getPhone());
-//        return "updateProfile";
-//    }
-@GetMapping("/success")
-public String login(Principal principal){
-    String username= principal.getName();
-    if (username.equals("Admin")){
-        return "redirect:/HomeAdmin";
+    @GetMapping("/success")
+    public String login(Principal principal){
+        String username= principal.getName();
+        if (username.equals("Admin")){
+            return "redirect:/HomeAdmin";
+        }
+        User user =service.identifyUserByUsername(username);
+        userId=user.getId();
+        return "redirect:/Home";
     }
-    User user =service.identifyUserByUsername(username);
-    userId=user.getId();
-    return "redirect:/Home";
-}
-    @RequestMapping("/Home")
-    public String home() {
-        return "Home";
-    }
-
-    @RequestMapping("/HomeAdmin")
-    public String homeAdmin() {
-        return "HomeAdmin";
-    }
-
 
 }
 
