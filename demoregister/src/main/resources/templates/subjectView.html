@@ -47,7 +47,7 @@ li a:hover {
   background-color: #111;
 }
 body{
-background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd5537605a92d15593e.jpg");
+background-image: url("https://thumbs.dreamstime.com/b/exam-503281.jpg");
  background-color: #cccccc;
 }
 </style>
@@ -57,7 +57,7 @@ background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd55
 
 <ul>
 
-    <li><a class="active" href="/Home">Home</a></li>
+    <li><a class="active" href="/HomeAdmin">Home</a></li>
 
 <!--    <li><a href="/scoreCard">Score card</a></li>-->
     <li><a href="/logout">Logout</a></li>
@@ -68,13 +68,13 @@ background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd55
         <th >SubjectId</th>
         <th>SubjectName</th>
 
-        <th>Quiz</th>
+
     </tr>
     <tr th:each="subject:${subjects}">
         <td th:text="${subject.subjectId}"></td>
         <td th:text="${subject.subjectName}"></td>
 
-        <td><a th:href="@{/QuizList/{id}(id=${subject.subjectId})}" class="btn btn-primary text-center" >Select Quiz</a></td>
+
     </tr>
 </table>
 </body>

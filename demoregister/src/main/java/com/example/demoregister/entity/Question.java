@@ -1,6 +1,5 @@
 package com.example.demoregister.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -10,33 +9,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.stereotype.Component;
-
-    @Component
     @Entity
     @Table(name = "questions")
     public class Question {
-
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int quesId;
-        private long quizId;
+        private Long quesId;
+        private Long quizId;
+        private Long subjectId;
         private String title;
         private String optionA;
         private String optionB;
         private String optionC;
-        private int ans;
-        private int chose;
-        @JsonIgnore
-        @ManyToOne
-        private QuizList quizList;
+        private String ans;
+
+
 
         public Question() {
-            super();
+
         }
 
-        public Question(int quesId,long quizId, String title, String optionA, String optionB, String optionC, int ans, int chose) {
-            super();
+        public Question(Long quesId,Long quizId, Long subjectId,String title, String optionA, String optionB, String optionC, String ans) {
+
             this.quizId=quizId;
             this.quesId = quesId;
             this.title = title;
@@ -44,7 +37,7 @@ import org.springframework.stereotype.Component;
             this.optionB = optionB;
             this.optionC = optionC;
             this.ans = ans;
-            this.chose = chose;
+            this.subjectId= subjectId;
         }
         public long getQuizId() {
             return quizId;
@@ -54,13 +47,6 @@ import org.springframework.stereotype.Component;
             this.quizId = quizId;
         }
 
-        public int getQuesId() {
-            return quesId;
-        }
-
-        public void setQuesId(int quesId) {
-            this.quesId = quesId;
-        }
 
         public String getTitle() {
             return title;
@@ -93,27 +79,40 @@ import org.springframework.stereotype.Component;
         public void setOptionC(String optionC) {
             this.optionC = optionC;
         }
+        public Long getQuesId() {
+            return quesId;
+        }
 
-        public int getAns() {
+        public void setQuesId(Long quesId) {
+            this.quesId = quesId;
+        }
+
+        public void setQuizId(Long quizId) {
+            this.quizId = quizId;
+        }
+
+        public Long getSubjectId() {
+            return subjectId;
+        }
+
+        public void setSubjectId(Long subjectId) {
+            this.subjectId = subjectId;
+        }
+
+        public String getAns() {
             return ans;
         }
 
-        public void setAns(int ans) {
+        public void setAns(String ans) {
             this.ans = ans;
         }
 
-        public int getChose() {
-            return chose;
-        }
 
-        public void setChose(int choosed) {
-            this.chose = choosed;
-        }
 
-        @Override
-        public String toString() {
-            return "Question [quesId=" + quesId + ",quizId=" + quizId +", title=" + title + ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC + ", ans=" + ans + ", chose=" + chose + "]";
-        }
+
+
+
+
 
     }
 

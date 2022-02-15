@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Subject</title>
+    <title>Register</title>
 
     <style>
         * {box-sizing: border-box}
@@ -70,21 +70,21 @@ a {
 <div class="container mt-5 d-flex justify-content-center">
 
     <div class="col-6">
-        <form action="/Subject" method = "post">
+        <form action="/adminLogin" method = "post">
             <div class="container">
-                <h1><center>Add subject</center></h1>
+                <h1><center>Admin Registeration</center></h1>
 
                 <hr>
-                <label for="number"><b>Subject Id</b></label>
-                <input type="number" placeholder="Enter Id" name="subjectId" id="number" required><br/><br/>
-                <label for="subject"><b>Subject Name</b></label>
-                <input type="text" placeholder="Enter Subject Name" name="subjectName" id="subject" required>
-                <button type="submit" class="registerbtn">Add</button>
+                <label for="text"><b>Name</b></label>
+                <input type="text" placeholder="Enter UserName" name="username" id="text" required>
 
-
-
-
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="psw" required>
+                <label for="psw"><b>confirm-Password</b></label>
+                <input type="password" placeholder="Enter Confirm Password" name="confirmPassword" id="confirmPassword" required>
+                <button type="submit" class="registerbtn">Register</button>
             </div>
+
 
         </form>
 </body>

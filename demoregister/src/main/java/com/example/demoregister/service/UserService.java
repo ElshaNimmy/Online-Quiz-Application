@@ -13,8 +13,8 @@ public class UserService {
 
     public User saveUser(User user){return userRepository.save(user);}
 
-    public User identifyUserByUserName(String username) {
-        return userRepository.findUserByUserName(username);
+    public User identifyUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
     public User identifyUserById(Long userId) {

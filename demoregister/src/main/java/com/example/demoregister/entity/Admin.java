@@ -1,15 +1,19 @@
 package com.example.demoregister.entity;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
 import javax.persistence.*;
 
 @Entity
 public class Admin {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false, unique = true)
-    private String adminname;
-    @Column(nullable = false)
+    private String username;
+
     private String email;
     @Column(nullable = false)
     private String password;
@@ -17,19 +21,14 @@ public class Admin {
     public Admin() {
 
     }
-    public Admin(Long id,String adminname, String email, String password) {
 
-        this.adminname = adminname;
-        this.email = email;
-        this.password = password;
-        this.id=id;
-    }
-    public Admin(String adminname, String email, String password) {
+    public Admin(String username, String password) {
 
-        this.adminname = adminname;
-        this.email = email;
+        this.username = username;
+
         this.password = password;
     }
+
     public Long getId() {
         return id;
     }
@@ -38,12 +37,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getAdminname() {
-        return adminname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminname(String adminname) {
-        this.adminname = adminname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
