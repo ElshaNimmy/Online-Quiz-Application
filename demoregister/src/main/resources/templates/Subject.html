@@ -57,7 +57,7 @@ background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd55
 
 <ul>
 
-    <li><a class="active" href="/Home">Home</a></li>
+    <li><a class="active" href="/home">Home</a></li>
 
 <!--    <li><a href="/scoreCard">Score card</a></li>-->
     <li><a href="/logout">Logout</a></li>
@@ -74,7 +74,7 @@ background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd55
         <td th:text="${subject.subjectId}"></td>
         <td th:text="${subject.subjectName}"></td>
 
-        <td><a th:href="@{/QuizList/{id}(id=${subject.subjectId})}" class="btn btn-primary text-center" >Select Quiz</a></td>
+        <td><a th:href="@{/quiz-list/{id}(id=${subject.subjectId})}" class="btn btn-primary text-center" >Select Quiz</a></td>
     </tr>
 </table>
 </body>

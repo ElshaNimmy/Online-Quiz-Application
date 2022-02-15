@@ -26,60 +26,60 @@ public class QuizController {
     static int score;
     static int correct=0;
     static int wrong=0;
-
     @Autowired
     private QuestionService questionService;
-
     @Autowired
     private UserService userService;
     @Autowired
     private ScoreService scoreService;
-
     @Autowired
     private SubjectService subjectService;
     @Autowired
     private QuizListService quizListService;
 
-
-    @RequestMapping("/Subject")
+    @RequestMapping("/subject")//SubjectList of quiz
     public String subjectDetails(Model model) {
         model.addAttribute("subjects", subjectService.getAllSubject());
-        return "Subject";
+        return "subject";
     }
-    @RequestMapping("/QuizList/{subjectId}")
+
+    @RequestMapping("/quiz-list/{subjectId}")//Quiz Level
     public String quizList(@PathVariable Long subjectId, Model model){
      subject = subjectService.getSubjectById(subjectId);
         idSubject=subject.getSubjectId();
         model.addAttribute("quizList",quizListService.getQuizByQuizId(subject));
-        return "QuizList";
+        return "quiz-list";
     }
-    @RequestMapping("/Quiz/{id}")
+
+    @RequestMapping("/quiz/{id}")//Quiz questions n answers
     public String quiz(@PathVariable Long id, Model model){
         quizId = id;
         List <Question> question = questionService.listAllQuizBySubject(quizId,subject.getSubjectId());
         model.addAttribute("qForm", question);
-        return "Quiz";
-    }
-    @RequestMapping("/UpdateSubject")
-    public String sub() {
-        return "UpdateSubject";
+        return "quiz";
     }
 
-    @PostMapping("/Subject")
-    public String subjectUpdation(HttpServletRequest req, Model model) {
+    @RequestMapping("/update-subject")
+    public String sub() {
+        return "update-subject";
+    }
+
+    @PostMapping("/subjects")//Adding quiz subject
+    public String subjectUpdate(HttpServletRequest req, Model model) {
         String subName=req.getParameter("subjectName");
         Long subId=(Long.parseLong(req.getParameter("subjectId")));
         Subject subject = new Subject(subId,subName);
         subjectService.saveSubject(subject);
         model.addAttribute("subjects", subjectService.getAllSubject());
-        return "subjectView";
-    }
-    @RequestMapping("/UpdateQuiz")
-    public String updateQuiz() {
-        return "UpdateQuiz";
+        return "subject-view";
     }
 
-    @PostMapping("/QuizList")
+    @RequestMapping("/update-quiz")
+    public String updateQuiz() {
+        return "update-quiz";
+    }
+
+    @PostMapping("/quiz-list")//Adding quiz level
     public String quizUpdate(HttpServletRequest req ,Model model) {
        Long subjectId= Long.valueOf((req.getParameter("subjectId")));
        Subject subject =subjectService.getSubjectById(subjectId);
@@ -89,37 +89,32 @@ public class QuizController {
        QuizList quizList=new QuizList(subject,level,quizId,score);
        quizListService.saveQuizList(quizList);
        model.addAttribute("quizList",quizListService.getQuizByQuizId(subject));
-        return "quizListView";
-
+        return "quiz-list-view";
     }
-    @RequestMapping("/updateQuestions")
+
+    @RequestMapping("/update-questions")
     public String updateQuestions() {
-        return "updateQuestions";
+        return "update-questions";
     }
 
-    @PostMapping("/Quiz")
+    @PostMapping("/quiz")//Adding quiz questions part
     public String questionUpdate(HttpServletRequest req, Model model) {
         Long quizId=(Long.parseLong(req.getParameter("quizId")));
         Long quesId=(Long.parseLong(req.getParameter("quesId")));
         Long subjectId=(Long.parseLong(req.getParameter("subjectId")));
         String ans=req.getParameter("ans");
-
         String optionA=req.getParameter("optionA");
         String optionB=req.getParameter("optionB");
         String optionC=req.getParameter("optionC");
         String title=req.getParameter("title");
-
         Question question=new Question(quesId,quizId,subjectId,title,optionB,optionC,optionA,ans);
         questionService.saveQuestion(question);
-
         model.addAttribute("qForm", questionService.listAllQuiz(quizId));
-        return "questionsView";
+        return "questions-view";
     }
 
-    @PostMapping("/submit")
+    @PostMapping("/submit")//Calculating result of quiz
     public String checkAns(HttpServletRequest request, Model model, Principal principal) {
-//        HttpSession session = request.getSession();
-//        String username = (String) session.getAttribute("username");
         correct=0;
         wrong=0;
         String username=principal.getName();
@@ -139,13 +134,11 @@ public class QuizController {
         model.addAttribute("quizDetails",quizList);
         model.addAttribute("subjectDetails",subject);
         model.addAttribute("username",username);
-//        score=correct*2;
-//        model.addAttribute("score",score);
         return "result";
 
     }
 
-    @PostMapping("/scoreCard")
+    @PostMapping("/score")//displaying score history
     public String scoreCard(HttpServletRequest request,Model model,Principal principal){
         String username=principal.getName();
         Score score=new Score();
@@ -157,12 +150,11 @@ public class QuizController {
         List<Score> scores = scoreService.listScoreByUsername(username);
         model.addAttribute("scores",scores);
 
-        //listScoreByUsername(request.getParameter("username"));
-        return "scoreCard";
-    }
+        return "score";
+      }
     private List listScoreByUsername(String username){
         List scoreCard1=scoreService.listScoreByUsername(username);
-        //System.out.println(scoreCard1);
+
         return null;
     }
 

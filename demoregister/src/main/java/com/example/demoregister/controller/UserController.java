@@ -29,33 +29,33 @@ public class UserController {
 
     @RequestMapping("/")
     public String index() {
-        return "Login";
+        return "login";
     }
 
-    @RequestMapping("/Register")
+    @RequestMapping("/register")
     public String register() {
-        return "Register";
+        return "register";
     }
 
-    @PostMapping("/Register")
+    @PostMapping("/register")
     public String userRegistration(HttpServletRequest req, Model model) {
         if (!(req.getParameter("password").equals(req.getParameter("confirmPassword")))) {
             model.addAttribute("message", "password doesn't match");
-            return "Register";
+            return "register";
         }
 
         User user = new User(req.getParameter("username"), req.getParameter("email"), req.getParameter("password"));
         service.saveUser(user);
-        return "Login";
+        return "login";
 
     }
 
-    @RequestMapping("/Home")
+    @RequestMapping("/home")
     public String home() {
-        return "Home";
+        return "home";
     }
 
-    @PostMapping("/Home")
+    @PostMapping("/home")
     public String validateUser(HttpServletRequest request, Model model) {
         User user = service.identifyUserByUsername(request.getParameter("username"));
         username = request.getParameter("username");
@@ -65,37 +65,37 @@ public class UserController {
                 HttpSession session = request.getSession();
                 session.setAttribute("username",user.getUsername());
                 session.setAttribute("userId",String.valueOf(user.getId()));
-                return "Home";
+                return "home";
             } else {
                 model.addAttribute("message", "Invalid password!!");
-                return "Login";
+                return "login";
             }
         } else {
             Admin admin = adminService.identifyAdminByUsername(username);
             if (!(Objects.isNull(admin))) {
                 if (admin.getPassword().equals(request.getParameter("password"))) {
-                    return "HomeAdmin";
+                    return "home-admin";
                 } else {
                     model.addAttribute("message", "Invalid password!!");
-                    return "Login";
+                    return "login";
                 }
             } else {
                 model.addAttribute("message", "Invalid credentials!!");
-                return "Login";
+                return "login";
             }
         }
     }
-    @RequestMapping("/HomeAdmin")
+    @RequestMapping("/home-admin")
     public String homeAdmin() {
-        return "HomeAdmin";
+        return "home-admin";
     }
 
-    @RequestMapping("/adminRegister")
+    @RequestMapping("/admin-register")
     public String adminRegister() {
-        return "adminRegister";
+        return "admin-register";
     }
 
-    @PostMapping("/adminLogin")
+    @PostMapping("/admin-login")
     public String adminRegister(HttpServletRequest request, Model model) {
         if (!(request.getParameter("password").equals(request.getParameter("confirmPassword")))) {
             model.addAttribute("message", "password doesn't match");
@@ -106,7 +106,7 @@ public class UserController {
         Admin admin = new Admin(username, password);
         adminService.saveAdmin(admin);
 
-        return "Login";
+        return "login";
 
     }
 
@@ -114,11 +114,11 @@ public class UserController {
     public String login(Principal principal){
         String username= principal.getName();
         if (username.equals("Admin")){
-            return "redirect:/HomeAdmin";
+            return "redirect:/home-admin";
         }
         User user =service.identifyUserByUsername(username);
         userId=user.getId();
-        return "redirect:/Home";
+        return "redirect:/home";
     }
 
 }

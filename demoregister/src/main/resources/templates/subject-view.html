@@ -47,35 +47,34 @@ li a:hover {
   background-color: #111;
 }
 body{
- background-image: url("https://i.pinimg.com/originals/b0/28/a2/b028a2493053bcd5537605a92d15593e.jpg");
+background-image: url("https://thumbs.dreamstime.com/b/exam-503281.jpg");
  background-color: #cccccc;
 }
-
 </style>
 </head>
 
 <body>
 
 <ul>
-    <li><a href="/Home">Home</a></li>
+
+    <li><a class="active" href="/home-admin">Home</a></li>
+
+<!--    <li><a href="/scoreCard">Score card</a></li>-->
     <li><a href="/logout">Logout</a></li>
 
 </ul>
 <table>
     <tr>
+        <th >SubjectId</th>
+        <th>SubjectName</th>
 
-        <th>Quiz Id</th>
-        <th>Level</th>
-        <th>Score</th>
-        <th>Quizz</th>
+
     </tr>
-    <tr th:each="quizList:${quizList}">
-        <td th:text="${quizList.quizId}"></td>
-        <td th:text="${quizList.level}"></td>
-        <td th:text="${quizList.score}"></td>
-<!--        <td><a th:href="/quiz" class="btn btn-primary text-center">Start Quiz</a></button></td>-->
+    <tr th:each="subject:${subjects}">
+        <td th:text="${subject.subjectId}"></td>
+        <td th:text="${subject.subjectName}"></td>
 
-        <td><a th:href="@{/Quiz/{id}(id=${quizList.quizId})}" class="btn btn-primary text-center">Start Quiz</a></button></td>
+
     </tr>
 </table>
 </body>

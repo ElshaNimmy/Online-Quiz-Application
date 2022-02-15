@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/reg.css}">
-    <title>Add subject</title>
+    <title>Admin Registeration</title>
 </head>
 <body>
 
@@ -19,13 +19,14 @@
 <div class="main-container container py-5 px-4">
 
     <div class="text-box">
-        <h1 class="mb-5 text-center">Add Subject</h1>
-        <form class="card bg-dark py-5 px-4" action="/Subject" method="POST">
-            <p>Subject Id:</p>
-            <input type="number" placeholder="Enter subject Id"  name="subjectId" />
-            <p>Subject Name:</p><input type="name" placeholder="Enter subject Name" name="subjectName" />
-
-            <button type="submit" class="btn btn-primary success">Add</button><br/>
+        <h1 class="mb-5 text-center">Admin Registeration</h1>
+        <form class="card bg-dark py-5 px-4" action="/admin-login" method="POST">
+            <p>User Name:</p>
+            <input type="text" placeholder="Enter User Name"  name="username" />
+            <p>Password:</p><input type="password" placeholder="Enter Password" name="password" id="psw" required>
+            <p>Confirm-Password:</p><input type="password" placeholder="Enter Confirm Password" name="confirmPassword" id="confirmPassword" required>
+            <p class="text-danger warning" th:if="${warning}" th:text="${warning}"></p>
+            <button type="submit" class="btn btn-primary success">Register</button><br/>
         </form>
 
     </div>
